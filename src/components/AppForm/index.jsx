@@ -20,11 +20,12 @@ function AppForm() {
       onFinish={onFinish}
     >
       <Form.Item
+        name="email"
         rules={[
           {
             type: "email",
             required: true,
-            message: "Por favor ingrese Correo!",
+            message: "Por favor ingrese un Correo",
           },
         ]}
       >
@@ -38,11 +39,21 @@ function AppForm() {
         rules={[
           {
             required: true,
-            message: "Por favor ingrese contraseña!",
+            message: "Por favor ingrese Contraseña!",
+          },
+          {
+            validator(_, value = "") {
+              switch (!isNaN(value)) {
+                case value.length <= 6:
+                  return Promise.resolve();
+                default:
+                  return Promise.reject(new Error("Ingrese clave con 7 o más caracteres"));
+              }
+            },
           },
         ]}
       >
-        <Input
+        <Input.Password
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
           placeholder="Contraseña"
@@ -53,7 +64,7 @@ function AppForm() {
           <Checkbox>Recordarme</Checkbox>
         </Form.Item>
 
-        <a className="login-form-forgot" href="#">
+        <a className="login-form-forgot" href="/">
           Olvidé mi contraseña
         </a>
       </Form.Item>
@@ -62,7 +73,7 @@ function AppForm() {
         <Button type="primary" htmlType="submit" className="login-form-button">
           Iniciar Sesión
         </Button>
-        O <a href="#">Registrate ahora!</a>
+        O <a href="/">Registrate ahora!</a>
       </Form.Item>
     </Form>
   );
