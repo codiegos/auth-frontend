@@ -5,8 +5,8 @@ function AppHeader() {
   return (
     <PageHeader
     className="site-page-header"
-    onBack={() => window.history.back()}
-    title="Back"
+    
+    title="Login"
     subTitle=""
   />
   )

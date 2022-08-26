@@ -1,42 +1,30 @@
-import { Breadcrumb, Layout, Typography } from "antd";
-import {Navigate} from 'react-router-dom';
-
-import "./index.css";
+import { Layout } from "antd";
+import { Footer } from "antd/lib/layout/layout";
 import React from "react";
-const { Link } = Typography;
 
 const { Header, Content } = Layout;
 
-function AppLayout() {
+function AppLayout({ children }) {
   return (
-    <Layout className="site-layout" style={{ background: "#fafafa" }}>
+    <Layout
+      className="site-layout"
+      style={{ background: "#fafafa", height: "100vh" }}
+    >
       <Header
         className="site-layout-background"
-        style={{ background: "rgb(24, 144, 255)" }}
+        style={{ background: "#5A54BE" }}
       >
         <div className="logo" />
       </Header>
-      <Breadcrumb
-        style={{
-          margin: "16px",
-        }}
-      >
-        <Breadcrumb.Item>Login</Breadcrumb.Item>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-      </Breadcrumb>
-      <Content
-        className="site-layout-background"
-        style={{
-          textAlign: "center",
-          alignItems: "center",
-        }}
-      >
-        <Link href="/userdetails" target="_blank">
-          
-          <h1>Hello {}</h1>
-        </Link>
-      </Content>
 
+      <Content className="site-layout-background">
+       {children}
+      </Content>
+      <Footer align="center">
+        Lorem ipsum dolor sit amet, consectetur adipisicing Aperiam corporis
+        iure, officiis illum dicta quas non unde obcaecati voluptas. Mollitia
+        est amet cupiditate delectus facilis.
+      </Footer>
     </Layout>
   );
 }

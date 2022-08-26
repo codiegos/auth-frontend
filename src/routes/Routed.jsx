@@ -1,20 +1,28 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
-import UserDetails from "../pages/UserDetails";
 import Login from "../pages/Login";
-import PrivateRoutes from "./PrivateRoutes";
 
 function Routed() {
-  return (
-    <Routes>
-      <Route element={<PrivateRoutes/>}>
-        <Route element={<Home/>} exact path="/home" />
-        <Route element={<UserDetails/>} exact path="/userdetails" />
-      </Route>
-        <Route element={<Login/>} exact path="/" />
-    </Routes>
-  );
+  const token = localStorage.getItem("token");
+  let routes;
+  if (token) {
+    routes = (
+      <>
+        <Route path="/" element={<Navigate to="/home" replace />} />
+        <Route element={<Home />} path="/home" />
+      </>
+    );
+  } else {
+    routes = (
+      <>
+        <Route element={<Login />} exact path="/" />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </>
+    );
+  }
+
+  return <Routes>{routes}</Routes>;
 }
 
 export default Routed;
